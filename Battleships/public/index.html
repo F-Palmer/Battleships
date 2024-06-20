@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="de">
     <head>
+        <meta charset="utf-8"/>
         <link rel="stylesheet" type="text/css" href="index.css">
         <title>Battleships</title>
+        <script src="./index.js"></script>
     </head>
     <body>
 
@@ -10,7 +12,7 @@
         <div id="panel">
 
             
-
+        
             <h1>Battleships</h1>
 
             <div id="game-settings">
@@ -30,7 +32,7 @@
             <button id="start-game">Spiel starten</button>
 
             <div class="tooltip">
-                <button class="btn"><img id="anleitungsIcon" src="./Images/anleitung.svg">
+                <button class="btn" onclick="openAnleitung()"><img id="anleitungsIcon" src="./Images/anleitung.svg">
                     <span class="tooltiptext">Spielanleitung</span>
                 </button>
             </div>
