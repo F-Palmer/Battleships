@@ -6,7 +6,7 @@
         <title>Battleships</title>
         <script src="./index.js"></script>
     </head>
-    <body>
+    <body class="menuebody">
 
 
         <div id="panel">
@@ -32,9 +32,11 @@
             <button id="start-game" onclick="startGame()">Spiel starten</button>
 
             <div class="tooltip">
-                <button class="btn" onclick="openAnleitung()"><img id="anleitungsIcon" src="./Images/anleitung.svg">
-                    <span class="tooltiptext">Spielanleitung</span>
-                </button>
+                <a href="anleitung.html">
+                    <button class="btn" onclick="openAnleitung()"><img id="anleitungsIcon" src="./Images/anleitung.svg">
+                        <span class="tooltiptext">Spielanleitung</span>
+                    </button>
+                </a>    
             </div>
 
             <p><a href="impressum.html">Impressum</a></p>

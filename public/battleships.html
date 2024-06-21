@@ -4,29 +4,36 @@
         <meta charset="utf-8" />
 		<title>Battleships</title>
         <link rel="stylesheet" href="battleships.css">
+        <link rel="stylesheet" href="index.css">
         
 	</head>
 	<body>
-        <div id="gameContainer">
-            <div id="container1" class="container"></div>
-            <div id="container2" class="container"></div>
-        </div>
-        <dialog id="gameStartDialog">
-            <div id="divGameStartDialog"></div>
-            <button onclick="closeGameStartDialog()">Close</button>
-        </dialog>
-        <dialog id="gameEndDialog">
-            <div id="divGameEndDialog"></div>
-            <button onclick="closeGameEndDialog()">Back to start page</button>
-        </dialog>
-        <div id="shipContainer"></div>
-        <button onclick="flip()">Rotate Ships</button>
-        <button id="startGameButton" onclick="startGame()">Start Game</button>
 
-            
-        <script src="fieldProperty.js"></script>
-        <script src="ship.js"></script>
-        <script src="battleships.js" ></script>
+        <div id="gameContainer" >
+            <div id="gameFieldContainer">
+                <div id="container1" class="container"></div>
+                <div id="container2" class="container"></div>
+            </div>
+            <dialog id="gameStartDialog">
+                <div id="divGameStartDialog"></div>
+                <button onclick="closeGameStartDialog()">Close</button>
+            </dialog>
+            <dialog id="gameEndDialog">
+                <div id="divGameEndDialog"></div>
+                <button onclick="repeatGameEndDialog()">Nochmal spiel</button>
+                <button onclick="closeGameEndDialog()">Zurück zur Starseite</button>
+            </dialog>
         
+            <div id="gamebtns">
+                <button class="gamebtn" onclick="flip()">Schiffe rotieren</button>
+                <button class="gamebtn" id="startGameButton" onclick="startGame()">Gefecht starten</button>
+            </div>
+
+            <div id="shipContainer"></div>
+                
+            <script src="fieldProperty.js"></script>
+            <script src="ship.js"></script>
+            <script src="battleships.js" ></script>
+        </div>
 	</body>
 </html>

@@ -69,6 +69,8 @@ app.get("/", (req, res) => {
     res.render("index")
 })
 
+
+
 app.post("/startGame", (req, res) => {
     difficultyLevel = req.body.difficultyLevel
     

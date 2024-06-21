@@ -63,6 +63,12 @@ function closeGameEndDialog(){
     document.location.href = "/"
     gameEndDialog.close()
 }
+
+function repeatGameEndDialog(){
+    document.location.href = "/battleships.html"
+    gameEndDialog.close()
+}
+
 function setContainerStyle(container){
     container.style.width = `${squareWidth * amountOfRows}px`
     container.style.height = `${squareWidth * amountOfRows}px`

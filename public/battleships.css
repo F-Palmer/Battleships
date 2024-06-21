@@ -1,6 +1,13 @@
 #gameContainer{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+}
+
+#gameFieldContainer{
+    display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     align-items: center;
 
@@ -13,10 +20,13 @@
     margin: 10px;
     display: flex;
     flex-wrap: wrap;
+    background-color: white;
+    padding: 25px 25px;
+    border-radius: 50px;
 }
 
 .field{
-    background-color: blue;
+    background-color: #007BFF ;
     
     border-color: aqua;
     border: solid 1px aqua;
@@ -25,10 +35,14 @@
 }
 
 #shipContainer{
-    margin-top: 50px;
+    margin: 10px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    width: 1000px;
+    align-items:center;
+    background-color: white;
+    padding: 30px 150px;
+    border-radius: 50px;
 }
 
 .destroyer{
@@ -39,6 +53,7 @@
 .submarine{
     width: 148px;
     height: 48px;
+    
 }
 
 .cruiser{
@@ -75,3 +90,19 @@
   .hidden{
     visibility: hidden;
   }
+
+  #gameStartDialog{
+    z-index: 10;
+  }
+
+  #gamebtns{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+  }
+  .gamebtn{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+
