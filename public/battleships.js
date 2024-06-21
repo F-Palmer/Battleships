@@ -26,7 +26,7 @@ new ship("ship2", "cruiser", 3),  new ship("ship3", "battleship", 4),
 new ship("ship4", "carrier", 5)]
 
 const squareWidth = 50;
-const amountOfRows = 8
+const amountOfRows = 10
 
 let FieldsOccupied = []
 
@@ -84,6 +84,7 @@ function setShipElements(){
 function containerEventListener(){
     container2.addEventListener('click', event => {
         if( winner == ""){
+            console.log("click")
             mouseX2 = event.clientX - container2.getBoundingClientRect().x 
             mouseY2 = event.clientY - container2.getBoundingClientRect().y 
             let IdOfField = getMousePositionX() + getMousePositionY() * amountOfRows
@@ -96,12 +97,14 @@ function containerEventListener(){
 
 function hitField( IdOfField){
     let color;
+    console.log("before fetch")
     fetch(`/hitField/Player/${IdOfField}` , { headers: {  'Accept': 'application/json', 'Content-Type': 'application/json' },
         method: "GET",
 
     })
     .then(response => response.json() )
     .then(data => {
+        console.log("in fetch")
             winner = data.winner;
         
             if(data.alreadyHit == false){

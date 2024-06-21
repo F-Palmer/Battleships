@@ -5,7 +5,7 @@ let winner = "";
 let difficultyLevel = "easy"
 
 
-const amountOfRows = 8
+const amountOfRows = 10
 
 
 const Player = 0;
@@ -47,10 +47,14 @@ class fieldProperty{
     }
 }
 
-
-const ships = [ new ship("ship0", "destroyer", 2),  new ship("ship1", "submarine", 3),  
-new ship("ship2", "cruiser", 3),  new ship("ship3", "battleship", 4), 
-new ship("ship4", "carrier", 5)]
+function fillShips(shipsArray){
+    shipsArray[0] =  new ship("ship0", "destroyer", 2)
+    shipsArray[1] =  new ship("ship1", "submarine", 3)
+    shipsArray[2] = new ship("ship2", "cruiser", 3)
+    shipsArray[3] = new ship("ship3", "battleship", 4)
+    shipsArray[4] = new ship("ship4", "carrier", 5)
+}
+const ships = []
 
 const shipsComputer = [ new ship("ship0", "destroyer", 2),  new ship("ship1", "submarine", 3),  
 new ship("ship2", "cruiser", 3),  new ship("ship3", "battleship", 4), 
@@ -68,11 +72,13 @@ app.get("/", (req, res) => {
 app.post("/startGame", (req, res) => {
     difficultyLevel = req.body.difficultyLevel
     
+    winner = ""
+    fillShips(ships)
+    fillShips(shipsComputer)
     fillgameBoard(gameBoardPlayer)
-fillgameBoard(gameBoardComputer)
-setComputerShips()
+    fillgameBoard(gameBoardComputer)
+    setComputerShips()
 })
-
 
 
 app.get("/getShip/:id", (req, res) => {
@@ -94,8 +100,11 @@ app.post("/setShip", (req, res) => {
 })
 
 app.get("/hitField/Player/:id", (req, res) => {
+    console.log("hitfiled1")
     let IdOfField = req.params.id
+
     hitField(IdOfField, gameBoardComputer, res)
+    console.log("hitfiled2")
 })
 
 app.get("/hitField/Computer", (req, res) => {
@@ -112,7 +121,6 @@ app.listen(8000)
 
 
 function hitField(IdOfField, gameBoard, res){
-    
     if(winner == "" && gameBoard[IdOfField].hit == false){
         let shipSunk = false;
         let hitShip;
