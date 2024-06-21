@@ -1,0 +1,30 @@
+<!DOCTYPE html >
+<html lang="en">
+	<head>
+        <meta charset="utf-8" />
+		<title>Battleships</title>
+        <link rel="stylesheet" href="battleships.css">
+        
+	</head>
+	<body>
+        <div id="gameContainer">
+            <div id="container1" class="container"></div>
+            <div id="container2" class="container"></div>
+        </div>
+        <dialog id="dialog">
+            <div id="divdialog"></div>
+            <button onclick="closeDialog()">Close</button>
+        </dialog>
+        <button onclick="flip()">Rotate Ships</button>
+        <button onclick="startGame()">Start Game</button>
+        <div id="shipContainer">        
+                
+        </div>
+
+            
+        <script src="fieldProperty.js"></script>
+        <script src="ship.js"></script>
+        <script src="battleships.js" ></script>
+        
+	</body>
+</html>
