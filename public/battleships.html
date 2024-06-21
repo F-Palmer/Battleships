@@ -11,15 +11,17 @@
             <div id="container1" class="container"></div>
             <div id="container2" class="container"></div>
         </div>
-        <dialog id="dialog">
-            <div id="divdialog"></div>
-            <button onclick="closeDialog()">Close</button>
+        <dialog id="gameStartDialog">
+            <div id="divGameStartDialog"></div>
+            <button onclick="closeGameStartDialog()">Close</button>
         </dialog>
+        <dialog id="gameEndDialog">
+            <div id="divGameEndDialog"></div>
+            <button onclick="closeGameEndDialog()">Back to start page</button>
+        </dialog>
+        <div id="shipContainer"></div>
         <button onclick="flip()">Rotate Ships</button>
-        <button onclick="startGame()">Start Game</button>
-        <div id="shipContainer">        
-                
-        </div>
+        <button id="startGameButton" onclick="startGame()">Start Game</button>
 
             
         <script src="fieldProperty.js"></script>

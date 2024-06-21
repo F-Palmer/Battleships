@@ -2,6 +2,21 @@
 const express = require("express")
 const app = express()
 let winner = "";
+let difficultyLevel = "easy"
+
+
+const amountOfRows = 8
+
+
+const Player = 0;
+const computer = 1;
+
+let turn = Player
+
+
+const gameBoardPlayer = []
+const gameBoardComputer = []
+
 
 class ship{
     degreeRotated = 0;
@@ -32,9 +47,32 @@ class fieldProperty{
     }
 }
 
+
+const ships = [ new ship("ship0", "destroyer", 2),  new ship("ship1", "submarine", 3),  
+new ship("ship2", "cruiser", 3),  new ship("ship3", "battleship", 4), 
+new ship("ship4", "carrier", 5)]
+
+const shipsComputer = [ new ship("ship0", "destroyer", 2),  new ship("ship1", "submarine", 3),  
+new ship("ship2", "cruiser", 3),  new ship("ship3", "battleship", 4), 
+new ship("ship4", "carrier", 5)]
+
+
 app.use(express.json())
 app.use(express.static("public"))
 app.use(express.urlencoded({extended : true }))
+
+app.get("/", (req, res) => {
+    res.render("index")
+})
+
+app.post("/startGame", (req, res) => {
+    difficultyLevel = req.body.difficultyLevel
+    
+    fillgameBoard(gameBoardPlayer)
+fillgameBoard(gameBoardComputer)
+setComputerShips()
+})
+
 
 
 app.get("/getShip/:id", (req, res) => {
@@ -53,8 +91,6 @@ app.post("/setShip", (req, res) => {
             addFieldProperty(getShipPosition(req.body.FieldAppendShipTo, ship), ship)
         }
     }
-
-
 })
 
 app.get("/hitField/Player/:id", (req, res) => {
@@ -109,33 +145,7 @@ function getRandomField(){
 }
     
 
-const amountOfRows = 8
 
-
-const Player = 0;
-const computer = 1;
-
-let turn = Player
-
-
-const gameBoardPlayer = []
-const gameBoardComputer = []
-
-
-
-
-const ships = [ new ship("ship0", "destroyer", 2),  new ship("ship1", "submarine", 3),  
-new ship("ship2", "cruiser", 3),  new ship("ship3", "battleship", 4), 
-new ship("ship4", "carrier", 5)]
-
-const shipsComputer = [ new ship("ship0", "destroyer", 2),  new ship("ship1", "submarine", 3),  
-new ship("ship2", "cruiser", 3),  new ship("ship3", "battleship", 4), 
-new ship("ship4", "carrier", 5)]
-
-
-fillgameBoard(gameBoardPlayer)
-fillgameBoard(gameBoardComputer)
-setComputerShips()
 
 
 function fillgameBoard(gameBoard){

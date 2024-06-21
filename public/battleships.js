@@ -4,9 +4,13 @@ const container2 = document.getElementById('container2')
 
 const shipContainer = document.getElementById("shipContainer")
 
-const dialog = document.getElementById("dialog")
+const gameStartDialog = document.getElementById("gameStartDialog")
 const divdialog = document.getElementById("divdialog")
 
+const gameEndDialog = document.getElementById("gameEndDialog")
+
+
+const startGameButton = document.getElementById("startGameButton")
 
 let draggedShip;
 let mouseX;
@@ -29,12 +33,14 @@ let FieldsOccupied = []
 function startGame(){
     if(Array.from(shipContainer.children).length === 0){
         containerEventListener()
-        divdialog.innerHTML ="<p> Game started!<p/>"
+        document.getElementById("divGameStartDialog").innerHTML ="<p> Game started!<p/>"
+        startGameButton.classList.add("hidden")
     }else{
-        divdialog.innerHTML ="<p> Place all ships to start the Game!<p/>"
+        document.getElementById("divGameStartDialog").innerHTML ="<p> Place all ships to start the Game!<p/>"
         
     }
-    dialog.show()
+    gameStartDialog.show()
+
 }
 
 
@@ -49,8 +55,13 @@ fillContainer(container2)
 addEventListener()
 
 
-function closeDialog(){
-    dialog.close()
+function closeGameStartDialog(){
+    gameStartDialog.close()
+}
+
+function closeGameEndDialog(){
+    document.location.href = "/"
+    gameEndDialog.close()
 }
 function setContainerStyle(container){
     container.style.width = `${squareWidth * amountOfRows}px`
@@ -65,7 +76,8 @@ function setShipElements(){
         shipElement.id = ship.id
         shipElement.classList.add(ship.name)
         shipElement.classList.add("ship")
-        shipElement.src = "./Images/schlachtschiff.png"
+        shipElement.setAttribute("alt", ship.name)
+        shipElement.src = "/Images/schlachtschiff.png"
         shipContainer.append(shipElement)
     }
 }
@@ -84,7 +96,7 @@ function containerEventListener(){
 
 function hitField( IdOfField){
     let color;
-    fetch(`http://localhost:8000/hitField/Player/${IdOfField}` , { headers: {  'Accept': 'application/json', 'Content-Type': 'application/json' },
+    fetch(`/hitField/Player/${IdOfField}` , { headers: {  'Accept': 'application/json', 'Content-Type': 'application/json' },
         method: "GET",
 
     })
@@ -107,7 +119,7 @@ function hitField( IdOfField){
 
 
 
-                fetch("http://localhost:8000/hitField/Computer" , { headers: {  'Accept': 'application/json', 'Content-Type': 'application/json' },
+                fetch("/hitField/Computer" , { headers: {  'Accept': 'application/json', 'Content-Type': 'application/json' },
                     method: "GET",
                 })
                 .then(response => response.json() )
@@ -135,8 +147,8 @@ function hitField( IdOfField){
 
 function showDialog(){
     if(winner != "" ){
-        dialog.show()
-        divdialog.innerHTML ="<p> "+ winner +" Won!<p/>"
+        document.getElementById("divGameEndDialog").innerHTML ="<p> "+ winner +" Won!<p/>"
+        gameEndDialog.show()
     }
 }
 
@@ -179,7 +191,7 @@ function addEventListener(){
 
 
 
-            fetch("http://localhost:8000/setShip" , {
+            fetch("/setShip" , {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
