@@ -32,6 +32,9 @@ function startGame(){
         containerEventListener()
         document.getElementById("divGameStartDialog").innerHTML ="<p> Gefecht hat gestartet!<p/>"
         startGameButton.classList.add("hidden")
+        document.getElementById("gamebtns").removeChild(document.getElementById("startGameButton"))
+        document.getElementById("gamebtns").removeChild(document.getElementById("rotateShipsButton"))
+        document.getElementById("gameContainer").removeChild(document.getElementById("shipContainer"))
     }else{
         document.getElementById("divGameStartDialog").innerHTML ="<p> Setze alle Schiffe um das Gefecht zu starten!<p/>"
         
@@ -157,7 +160,7 @@ function hitField( IdOfField){
 
 function showDialog(){
     if(winner != "" ){
-        document.getElementById("divGameEndDialog").innerHTML ="<p> "+ winner +" Won!<p/>"
+        document.getElementById("divGameEndDialog").innerHTML ="<p> "+ winner +" hat gewonnen!<p/>"
         gameEndDialog.showModal()
     }
 }
