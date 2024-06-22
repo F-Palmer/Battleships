@@ -245,10 +245,7 @@ function fillContainer(container){
 }
 
 function flip(){
-    for( const ship of Array.from(document.getElementById('shipContainer').children)){
 
-
-    }
     const shipsLeftToPlace = Array.from(document.getElementById('shipContainer').children)
     for(const shipElement of shipsLeftToPlace){
 
@@ -333,11 +330,11 @@ function getField(container , id){
 function paintShipImage(ship){
     let fieldElement = Array.from(container2.children).find((element) => element.id == ship.position)
     const shipElement = document.createElement("img")
-    shipElement.id = ship.id
+    shipElement.id = `0${ship.id}`
     shipElement.classList.add(ship.name)
     shipElement.classList.add("ship")
-    shipElement.src = "./Images/schlachtschiffDestroyed.png"
-    shipElement.style.opacity = "1"
+    shipElement.setAttribute("alt", ship.name)
+    shipElement.src = "/Images/schlachtschiffDestroyed.png"
     shipElement.style.transform=`rotate(${ship.degreeRotated}deg)`
     fieldElement.append(shipElement)
 }

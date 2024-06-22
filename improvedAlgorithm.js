@@ -1,3 +1,7 @@
+
+module.exports = { getNextField };
+
+const amountOfRows = 10
 let shotStatus = 1; 
 let nextPossibleHits = [];
 
