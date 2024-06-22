@@ -1,101 +1,53 @@
 
 const express = require("express")
-
 const app = express()
-let winner = "";
-let difficultyLevel = 0
-
-
-const amountOfRows = 10
-
-
-const Player = 0;
-const computer = 1;
-
-let turn = Player
-
-
-const gameBoardPlayer = []
-const gameBoardComputer = []
-
-
-class ship{
-    degreeRotated = 0;
-    position;
-    constructor(id, name, length){
-        this.id = id
-        this.name = name
-        this.length = length
-        this.remainingFields = length
-    } 
-
-    setDegreeRotated(degreeRotated){
-        this.degreeRotated =  degreeRotated
-    }
-    setPosition(position){
-        this.position = position
-    }
-
-}
-    
-class fieldProperty{
-    constructor(hit, ship){
-        this.hit = hit 
-        this.ship = ship
-    }
-    setShip(ship){
-        this.ship = ship
-    }
-}
-
-function fillShips(shipsArray){
-    shipsArray[0] =  new ship("ship0", "destroyer", 2)
-    shipsArray[1] =  new ship("ship1", "submarine", 3)
-    shipsArray[2] = new ship("ship2", "cruiser", 3)
-    shipsArray[3] = new ship("ship3", "battleship", 4)
-    shipsArray[4] = new ship("ship4", "carrier", 5)
-}
-const ships = []
-
-const shipsComputer = [ new ship("ship0", "destroyer", 2),  new ship("ship1", "submarine", 3),  
-new ship("ship2", "cruiser", 3),  new ship("ship3", "battleship", 4), 
-new ship("ship4", "carrier", 5)]
-
 
 app.use(express.json())
 app.use(express.static("public"))
 app.use(express.urlencoded({extended : true }))
 
+
+let winner = "";
+let difficultyLevel = 0
+
+const amountOfRows = 10
+
+const gameBoardPlayer = []
+const gameBoardComputer = []
+
+const ships = []
+const shipsComputer = []
+
+
 app.get("/", (req, res) => {
     res.render("index")
-
+    
     res.sendStatus(200)
 })
 
 
 app.post("/setDifficultyLevel", (req, res) => {
-
+    
     difficultyLevel = req.body.difficultyLevel
-
+    
     res.sendStatus(200)
 })
 
 
 app.get("/startGame", (req, res) => {
-
     winner = ""
     fillShips(ships)
     fillShips(shipsComputer)
     fillgameBoard(gameBoardPlayer)
     fillgameBoard(gameBoardComputer)
     setComputerShips()
-
+    
     res.sendStatus(200)
 })
 
 
 app.get("/getShip/:id", (req, res) => {
-
+    
     let id = req.params.id
     for(let ship of ships){
         if(ship.id == id){
@@ -116,14 +68,14 @@ app.post("/setShip", (req, res) => {
 
 app.get("/hitField/Player/:id", (req, res) => {
     let IdOfField = req.params.id
-
+    
     hitField(IdOfField, gameBoardComputer, res)
 })
 
 app.get("/hitField/Computer", (req, res) => {
     let IdOfField = getNextField(difficultyLevel)   
     hitField(IdOfField, gameBoardPlayer, res)
-
+    
 })
 
 
@@ -132,8 +84,13 @@ app.listen(port, () => {
     console.log(`Server started on ${port}`);
 });
 
-
-
+function fillShips(shipsArray){
+    shipsArray[0] =  new ship("ship0", "destroyer", 2)
+    shipsArray[1] =  new ship("ship1", "submarine", 3)
+    shipsArray[2] = new ship("ship2", "cruiser", 3)
+    shipsArray[3] = new ship("ship3", "battleship", 4)
+    shipsArray[4] = new ship("ship4", "carrier", 5)
+}
 
 function hitField(IdOfField, gameBoard, res){
     if(winner == "" && gameBoard[IdOfField].hit == false){
@@ -159,25 +116,11 @@ function hitField(IdOfField, gameBoard, res){
 }
 
 
-function getRandomField(){
-    let randomField
-    do {
-        randomField = Math.floor(Math.random() *(amountOfRows * amountOfRows));    
-    } while (gameBoardPlayer[randomField].hit != false);
-    return randomField
-}
-    
-
-
-
-
 function fillgameBoard(gameBoard){
     for( let i = 0; i < amountOfRows * amountOfRows; i++){
         gameBoard[i] = new fieldProperty(false, false);
     }
 }
-
-
 
 function getShipPosition( shipPosistion , ship){
     
@@ -207,7 +150,6 @@ function addFieldPropertyComputer(shipPositions, ship){
         gameBoardComputer[shipPosition].setShip(ship)
     }
 }
-
 
 
 function setComputerShips(){
@@ -282,8 +224,6 @@ function getNextField(difficulty){
                 field = Math.floor(Math.random() * (amountOfRows * amountOfRows));
             }while(gameBoardPlayer[field].hit)
 
-            // gameBoardPlayer[field].hit = true;
-
             if(gameBoardPlayer[field].ship){
 
                 if(gameBoardPlayer[field].ship.remainingFields == 0){
@@ -303,8 +243,6 @@ function getNextField(difficulty){
             do{
                 field = Math.floor(Math.random() * (amountOfRows * amountOfRows));
             }while(!gameBoardPlayer[field].ship || gameBoardPlayer[field].hit)
-
-            // gameBoardPlayer[field].hit = true;
 
             if(gameBoardPlayer[field].ship.remainingFields == 0){
                 shotStatus = 1; 
@@ -332,17 +270,14 @@ function getNextField(difficulty){
                 
                 nextPossibleHits.splice(0, nextPossibleHits.length);
                 shotStatus = 1;
-                // gameBoardPlayer[field].hit = true;
                 return field;
             }else{
                 getAllAdjacentFields(field); 
                 shotStatus = 2;
-                // gameBoardPlayer[field].hit = true;
                 return field;
             }
         }else{
             shotStatus = 2; 
-            // gameBoardPlayer[field].hit = true; 
             return field;
         }
     }
@@ -401,42 +336,6 @@ function getAllAdjacentFields(field){
     }
 }
 
-function temp(){
-    
-    let nextField = getNextField(0.1); 
-    hitFieldComputer(container1 , nextField, gameBoardPlayer);
-    turn = Player;
-
-}
-
-function hitFieldComputer(container, IdOfField, gameBoard){
-    
-        let color;
-        let currentShip = gameBoard[IdOfField].ship
-
-        if(currentShip == false){
-
-            color = "darkblue"
-        }else{
-            currentShip.remainingFields--;
-            if(currentShip.remainingFields > 0){
-                color = "red"
-            }else{
-                color = "red"
-                
-                if(turn == Player){
-                    
-                    paintShipImage(currentShip, gameBoard)
-                }
-            }
-        }
-        getField(container, IdOfField).style.backgroundColor = color
-        checkForWin(shipsComputer)
-        checkForWin(ships)
-    
-}
-
-
 
 function numberToRow(number){
     let row = Math.floor(number/amountOfRows);
@@ -453,6 +352,37 @@ function rowColumToNumber(row, colum){
     return number;
 }
 
+
+
+
+class ship{
+    degreeRotated = 0;
+    position;
+    constructor(id, name, length){
+        this.id = id
+        this.name = name
+        this.length = length
+        this.remainingFields = length
+    } 
+
+    setDegreeRotated(degreeRotated){
+        this.degreeRotated =  degreeRotated
+    }
+    setPosition(position){
+        this.position = position
+    }
+
+}
+    
+class fieldProperty{
+    constructor(hit, ship){
+        this.hit = hit 
+        this.ship = ship
+    }
+    setShip(ship){
+        this.ship = ship
+    }
+}
 
 class pos{
     constructor(row, colum){
