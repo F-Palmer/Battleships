@@ -259,13 +259,16 @@ function flip(){
         switch(ship.degreeRotated) {
             case 0:
                 ship.setDegreeRotated(90)
+                document.getElementById('shipContainer').style.paddingBottom = "230px"
                 break;
             case 90:
                 ship.setDegreeRotated(0)
+                document.getElementById('shipContainer').style.paddingBottom = "30px"
                 break;
         }
         shipElement.style.transform=`rotate(${ship.degreeRotated}deg)`
-    }    
+    } 
+
 }
 
 function isSetShipAllowed(field, ship){
