@@ -91,12 +91,6 @@
     visibility: hidden;
 }
 
-.gameDialog{
-    text-align: center;
-    border-radius: 10px;
-    border-color: #007BFF;
-}
-
 #gamebtns{
     display: flex;
     justify-content: center;

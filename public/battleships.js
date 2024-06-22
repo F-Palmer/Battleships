@@ -30,7 +30,7 @@ let FieldsOccupied = []
 function startGame(){
     if(Array.from(shipContainer.children).length === 0){
         containerEventListener()
-        document.getElementById("divGameStartDialog").innerHTML ="<p> Gefecht hat gestartet!<p/>"
+        document.getElementById("divGameStartDialog").innerHTML ="<p> Gefecht gestartet!<p/>"
         startGameButton.classList.add("hidden")
         document.getElementById("gamebtns").removeChild(document.getElementById("startGameButton"))
         document.getElementById("gamebtns").removeChild(document.getElementById("rotateShipsButton"))

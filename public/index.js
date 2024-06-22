@@ -27,6 +27,9 @@ function startGame(){
         document.location.href = "/battleships.html"
         console.log("battleship.html")
 
+    }else{
+        document.getElementById("noDifficultySelectedDialogDiv").innerHTML='<p> Du musst einen Schwierigkeitsgrad wählen, bevor du das Spiel starten kannst!</p>'
+        document.getElementById("noDifficultySelectedDialog").showModal()
     }
 }
 
@@ -36,4 +39,8 @@ function backToIndex(){
 
 function openAnleitung(){
     document.location.href = "/anleitung.html"    
+}
+
+function closeDialog(){
+    document.getElementById("noDifficultySelectedDialog").close()
 }

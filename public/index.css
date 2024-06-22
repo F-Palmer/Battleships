@@ -91,3 +91,9 @@ a {
   .tooltip:hover .tooltiptext {
     visibility: visible;
   }
+
+  .dialog{
+    text-align: center;
+    border-radius: 10px;
+    border-color: #007BFF;
+}
