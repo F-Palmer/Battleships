@@ -16,9 +16,6 @@ let draggedShip;
 let mouseX;
 let mouseY;
 
-let mouseX2;
-let mouseY2;
-
 let winner = "";
 
 const ships = [ new ship("ship0", "destroyer", 2),  new ship("ship1", "submarine", 3),  
@@ -33,13 +30,13 @@ let FieldsOccupied = []
 function startGame(){
     if(Array.from(shipContainer.children).length === 0){
         containerEventListener()
-        document.getElementById("divGameStartDialog").innerHTML ="<p> Game started!<p/>"
+        document.getElementById("divGameStartDialog").innerHTML ="<p> Gefecht hat gestartet!<p/>"
         startGameButton.classList.add("hidden")
     }else{
-        document.getElementById("divGameStartDialog").innerHTML ="<p> Place all ships to start the Game!<p/>"
+        document.getElementById("divGameStartDialog").innerHTML ="<p> Setze alle Schiffe um das Gefecht zu starten!<p/>"
         
     }
-    gameStartDialog.show()
+    gameStartDialog.showModal()
 
 }
 
@@ -55,6 +52,16 @@ fillContainer(container2)
 addEventListener()
 
 
+
+function repeatGameEndDialog(){
+    fetch(`/startGame` , { headers: {  'Accept': 'application/json', 'Content-Type': 'application/json' },
+    method: "GET",
+    })
+    gameEndDialog.close()
+    document.location.href = "/battleships.html"
+    
+}
+
 function closeGameStartDialog(){
     gameStartDialog.close()
 }
@@ -64,10 +71,6 @@ function closeGameEndDialog(){
     gameEndDialog.close()
 }
 
-function repeatGameEndDialog(){
-    document.location.href = "/battleships.html"
-    gameEndDialog.close()
-}
 
 function setContainerStyle(container){
     container.style.width = `${squareWidth * amountOfRows}px`
@@ -94,12 +97,7 @@ function containerEventListener(){
         for(let i = 0; i < amountOfRows * amountOfRows; i ++){
             fieldElementArray[i].addEventListener('click', event => {
                 if( winner == ""){
-                    // console.log("click")
-                    // mouseX2 = event.clientX - container2.getBoundingClientRect().x 
-                    // mouseY2 = event.clientY - container2.getBoundingClientRect().y 
                     let IdOfField = parseInt(fieldElementArray[i].id)
-                    console.log(IdOfField)
-                    
                     hitField( IdOfField)      
                 }
             })
@@ -109,18 +107,15 @@ function containerEventListener(){
 
 function hitField( IdOfField){
     let color;
-    console.log("before fetch")
     fetch(`/hitField/Player/${IdOfField}` , { headers: {  'Accept': 'application/json', 'Content-Type': 'application/json' },
         method: "GET",
 
     })
     .then(response => response.json() )
     .then(data => {
-        console.log("in fetch")
             winner = data.winner;
         
             if(data.alreadyHit == false){
-                console.log("color")
                 if(data.hitShip == true){
                     color = "red"
                 }else{
@@ -163,7 +158,7 @@ function hitField( IdOfField){
 function showDialog(){
     if(winner != "" ){
         document.getElementById("divGameEndDialog").innerHTML ="<p> "+ winner +" Won!<p/>"
-        gameEndDialog.show()
+        gameEndDialog.showModal()
     }
 }
 
@@ -299,13 +294,8 @@ function getDraggedPositionY(){
     return Math.floor(mouseY / squareWidth)
 }
 
-function getMousePositionX(){
-    return Math.floor(mouseX2 / squareWidth) 
-}
 
-function getMousePositionY(){
-    return Math.floor(mouseY2 / squareWidth)
-}
+
 
 function getShipById(id){
     for(ship of ships){

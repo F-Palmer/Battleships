@@ -36,7 +36,7 @@ class ship{
     }
 
 }
-
+    
 class fieldProperty{
     constructor(hit, ship){
         this.hit = hit 
@@ -67,19 +67,28 @@ app.use(express.urlencoded({extended : true }))
 
 app.get("/", (req, res) => {
     res.render("index")
+
+    res.sendStatus(200)
 })
 
 
-
-app.post("/startGame", (req, res) => {
+app.post("/setDifficultyLevel", (req, res) => {
     difficultyLevel = req.body.difficultyLevel
-    
+
+    res.sendStatus(200)
+})
+
+
+app.get("/startGame", (req, res) => {
+
     winner = ""
     fillShips(ships)
     fillShips(shipsComputer)
     fillgameBoard(gameBoardPlayer)
     fillgameBoard(gameBoardComputer)
     setComputerShips()
+
+    res.sendStatus(200)
 })
 
 
@@ -99,14 +108,13 @@ app.post("/setShip", (req, res) => {
             addFieldProperty(getShipPosition(req.body.FieldAppendShipTo, ship), ship)
         }
     }
+    res.sendStatus(200)
 })
 
 app.get("/hitField/Player/:id", (req, res) => {
-    console.log("hitfiled1")
     let IdOfField = req.params.id
 
     hitField(IdOfField, gameBoardComputer, res)
-    console.log("hitfiled2")
 })
 
 app.get("/hitField/Computer", (req, res) => {
