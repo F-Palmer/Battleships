@@ -3,7 +3,7 @@
     flex-direction: column;
 }
 
-#gameFieldContainer{
+#gameFieldsContainer{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,7 +12,7 @@
                                gut platziert werden können, ohne dass gescrollt werden muss*/
 }
     
-.container{
+.fieldContainer{
     min-width: 500px;
     min-height: 500px;
     margin: 10px;
@@ -94,12 +94,10 @@
 #gamebtns{
     display: flex;
     justify-content: center;
-    margin: 10px;
 }
 
 .gamebtn{
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: 10px;
 }
 
 .divGameDialogBtns{

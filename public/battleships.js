@@ -1,6 +1,6 @@
 
-const container1 = document.getElementById('container1')
-const container2 = document.getElementById('container2')
+const fieldContainer1 = document.getElementById('fieldContainer1')
+const fieldContainer2 = document.getElementById('fieldContainer2')
 
 const shipContainer = document.getElementById("shipContainer")
 
@@ -8,7 +8,6 @@ const gameStartDialog = document.getElementById("gameStartDialog")
 const divdialog = document.getElementById("divdialog")
 
 const gameEndDialog = document.getElementById("gameEndDialog")
-
 
 const startGameButton = document.getElementById("startGameButton")
 
@@ -22,11 +21,27 @@ const ships = [ new ship("ship0", "destroyer", 2),  new ship("ship1", "submarine
 new ship("ship2", "cruiser", 3),  new ship("ship3", "battleship", 4), 
 new ship("ship4", "carrier", 5)]
 
-const squareWidth = 50;
-const amountOfRows = 10
+
 
 let FieldsOccupied = []
 
+
+//Größe der Spielfeldcontainer wird festgelegt
+const squareWidth = 50;
+const amountOfRows = 10
+setContainerStyle(fieldContainer1, squareWidth, amountOfRows)
+setContainerStyle(fieldContainer2, squareWidth, amountOfRows)
+
+//Die Spielfeldcontainer werden mit den einzelnen Feldern gefüllt
+fillContainer(fieldContainer1)
+fillContainer(fieldContainer2)
+
+setShipElements()
+addShipEventListener()
+
+addEventListener()
+
+//Funktionen
 function startGame(){
     if(Array.from(shipContainer.children).length === 0){
         containerEventListener()
@@ -42,19 +57,6 @@ function startGame(){
     gameStartDialog.showModal()
 
 }
-
-
-
-setContainerStyle(container1)
-setContainerStyle(container2)
-
-setShipElements()
-addShipEventListener()
-fillContainer(container1)
-fillContainer(container2)
-addEventListener()
-
-
 
 function repeatGameEndDialog(){
     fetch(`/startGame` , { headers: {  'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -74,8 +76,7 @@ function closeGameEndDialog(){
     gameEndDialog.close()
 }
 
-
-function setContainerStyle(container){
+function setContainerStyle(container, squareWidth, amountOfRows){
     container.style.width = `${squareWidth * amountOfRows}px`
     container.style.height = `${squareWidth * amountOfRows}px`
     container.style.minWidth = `${squareWidth * amountOfRows}px`
@@ -95,7 +96,7 @@ function setShipElements(){
 }
 function containerEventListener(){
 
-    let fieldElementArray = Array.from(container2.children)
+    let fieldElementArray = Array.from(fieldContainer2.children)
         
         for(let i = 0; i < amountOfRows * amountOfRows; i ++){
             fieldElementArray[i].addEventListener('click', event => {
@@ -106,7 +107,6 @@ function containerEventListener(){
             })
         }
 }
-
 
 function hitField( IdOfField){
     let color;
@@ -128,7 +128,7 @@ function hitField( IdOfField){
                 if(data.shipSunk != false ){
                     paintShipImage(data.shipSunk)
                 }
-                getField(container2, IdOfField).style.backgroundColor = color 
+                getField(fieldContainer2, IdOfField).style.backgroundColor = color 
 
 
 
@@ -148,7 +148,7 @@ function hitField( IdOfField){
                             color = "darkblue"
                         }
                             
-                        getField(container1, `0${data.IdOfField}`  ).style.backgroundColor = color 
+                        getField(fieldContainer1, `0${data.IdOfField}`  ).style.backgroundColor = color 
                     }
                     showDialog()
                 })
@@ -157,14 +157,12 @@ function hitField( IdOfField){
     })
 }
 
-
 function showDialog(){
     if(winner != "" ){
         document.getElementById("divGameEndDialog").innerHTML ="<p> "+ winner +" hat gewonnen!<p/>"
         gameEndDialog.showModal()
     }
 }
-
 
 function addShipEventListener(){
     for( let shipElement of Array.from(document.getElementById('shipContainer').children)){
@@ -181,9 +179,8 @@ function addShipEventListener(){
     }
 }
 
-
 function addEventListener(){
-    for ( const field of Array.from(container1.children)){
+    for ( const field of Array.from(fieldContainer1.children)){
 
         
         field.addEventListener('dragover', event =>{
@@ -200,7 +197,7 @@ function addEventListener(){
             getShipElement(draggedShip.id).classList.add("unselectable")
             let FieldAppendShipTo = parseInt(field.id) - getFieldShift(draggedShip)
 
-            getField(container1, `0${FieldAppendShipTo}`).prepend(getShipElement(draggedShip.id))
+            getField(fieldContainer1, `0${FieldAppendShipTo}`).prepend(getShipElement(draggedShip.id))
 
 
 
@@ -233,10 +230,10 @@ function shipWithinTheBoard(field){
 
 function fillContainer(container){
 
-    for( let i = 0 ; i < amountOfRows * amountOfRows; i++){
+    for(let i = 0 ; i < amountOfRows * amountOfRows; i++){
         const field = document.createElement('div')
         field.classList.add('field')
-        if(container == container1){
+        if(container == fieldContainer1){
             field.id = `0${i}`
 
         }else{
@@ -256,16 +253,19 @@ function flip(){
         switch(ship.degreeRotated) {
             case 0:
                 ship.setDegreeRotated(90)
+
+                //sorgt dafür, dass der Container um die Schiffe größer wird, wenn diese rotiert werden
                 document.getElementById('shipContainer').style.paddingBottom = "230px"
                 break;
             case 90:
                 ship.setDegreeRotated(0)
+
+                //sorgt dafür, dass der Container um die Schiffe kleiner wird, wenn diese rotiert werden
                 document.getElementById('shipContainer').style.paddingBottom = "30px"
                 break;
         }
         shipElement.style.transform=`rotate(${ship.degreeRotated}deg)`
     } 
-
 }
 
 function isSetShipAllowed(field, ship){
@@ -297,9 +297,6 @@ function getDraggedPositionY(){
     return Math.floor(mouseY / squareWidth)
 }
 
-
-
-
 function getShipById(id){
     for(ship of ships){
         if(ship.id == id){
@@ -307,7 +304,6 @@ function getShipById(id){
         }
     }
 }
-
 
 function getShipPosition( shipPosistion , ship){
     
@@ -322,7 +318,6 @@ function getShipPosition( shipPosistion , ship){
     return shipPosistions
 }
 
-
 function getField(container , id){
     fields = Array.from(container.children)
     for( let field of fields){
@@ -332,9 +327,8 @@ function getField(container , id){
     }
 }
 
-
 function paintShipImage(ship){
-    let fieldElement = Array.from(container2.children).find((element) => element.id == ship.position)
+    let fieldElement = Array.from(fieldContainer2.children).find((element) => element.id == ship.position)
     const shipElement = document.createElement("img")
     shipElement.id = `0${ship.id}`
     shipElement.classList.add(ship.name)
@@ -345,9 +339,6 @@ function paintShipImage(ship){
     fieldElement.append(shipElement)
 }
 
-
-
-
 function getShipElement(id){
     for( let ship of Array.from(document.getElementById('shipContainer').children)){
 
@@ -356,7 +347,6 @@ function getShipElement(id){
         }
     }
 }
-
 
 function addOccupiedFields(IdOfField, ship){
     FieldsOccupied = FieldsOccupied.concat(getShipPosition(IdOfField, ship))
