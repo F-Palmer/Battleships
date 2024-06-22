@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="de">
     <head>
-        <meta charset="utf-8"/>
-        <link rel="stylesheet" type="text/css" href="index.css">
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="./css-files/general.css">
+        <link rel="stylesheet" type="text/css" href="./css-files/menu.css">
+        <link rel="stylesheet" type="text/css" href="./css-files/index.css">
         <title>Battleships</title>
         <script src="./index.js"></script>
     </head>
     <body class="menuebody">
+        <div class="panel">
 
-
-        <div id="panel">
-
-            
-        
             <h1>Battleships</h1>
 
             <div id="game-settings">
@@ -25,21 +23,23 @@
                 <option value="medium">Mittel</option>
                 <option value="hard">Schwer</option>
             </select>
+
+
                     
-            
-            
-            
             <button id="start-game" onclick="startGame()">Spiel starten</button>
 
             <div class="tooltip">
-                <a href="anleitung.html">
-                    <button class="btn" onclick="openAnleitung()"><img id="anleitungsIcon" src="./Images/anleitung.svg">
-                        <span class="tooltiptext">Spielanleitung</span>
-                    </button>
-                </a>    
+                <button id="anleitungsbutton" onclick="openAnleitung()"><img id="anleitungsIcon" src="./Images/anleitung.svg" alt="Zeigt ein Symbol das für eine Anleitung stehen soll">
+                    <span class="tooltiptext">Spielanleitung</span>
+                </button>  
             </div>
 
             <p><a href="impressum.html">Impressum</a></p>
         </div>
+        <dialog id="noDifficultySelectedDialog" class="dialog">
+            <div id="noDifficultySelectedDialogDiv"></div>
+            <button onclick="closeDialog()">Schließen</button>
+        </div>
+    </dialog>
     </body>
 </html>

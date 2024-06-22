@@ -1,9 +1,10 @@
 <!DOCTYPE html >
 <html lang="en">
 	<head>
-        <meta charset="utf-8" />
+        <meta charset="utf-8">
 		<title>Battleships</title>
-        <link rel="stylesheet" href="battleships.css">
+        <link rel="stylesheet" type="text/css" href="./css-files/general.css">
+        <link rel="stylesheet" href="./css-files/battleships.css">
         <link rel="stylesheet" href="index.css">
         
 	</head>
@@ -14,13 +15,13 @@
                 <div id="container1" class="container"></div>
                 <div id="container2" class="container"></div>
             </div>
-            <dialog id="gameStartDialog" class="gameDialog">
+            <dialog id="gameStartDialog" class="dialog">
                 <div id="divGameStartDialog"></div>
                 <div class="divGameDialogBtns">
                     <button onclick="closeGameStartDialog()">Schließen</button>
                 </div>
             </dialog>
-            <dialog id="gameEndDialog" class="gameDialog">
+            <dialog id="gameEndDialog" class="dialog">
                 <div id="divGameEndDialog"></div>
                 <div class="divGameDialogBtns">
                     <button id="repeatGameEndDialog" class="gamebtn" onclick="repeatGameEndDialog()">Nochmal spielen</button>
@@ -29,7 +30,7 @@
             </dialog>
         
             <div id="gamebtns">
-                <button class="gamebtn" id="rotateShipsButton"onclick="flip()">Schiffe rotieren</button>
+                <button class="gamebtn" id="rotateShipsButton" onclick="flip()">Schiffe rotieren</button>
                 <button class="gamebtn" id="startGameButton" onclick="startGame()">Gefecht starten</button>
                 <button class="gamebtn" onclick="closeGameEndDialog()">Zurück zur Starseite</button>
             </div>

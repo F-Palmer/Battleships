@@ -30,7 +30,7 @@ let FieldsOccupied = []
 function startGame(){
     if(Array.from(shipContainer.children).length === 0){
         containerEventListener()
-        document.getElementById("divGameStartDialog").innerHTML ="<p> Gefecht hat gestartet!<p/>"
+        document.getElementById("divGameStartDialog").innerHTML ="<p> Gefecht gestartet!<p/>"
         startGameButton.classList.add("hidden")
         document.getElementById("gamebtns").removeChild(document.getElementById("startGameButton"))
         document.getElementById("gamebtns").removeChild(document.getElementById("rotateShipsButton"))
@@ -256,13 +256,16 @@ function flip(){
         switch(ship.degreeRotated) {
             case 0:
                 ship.setDegreeRotated(90)
+                document.getElementById('shipContainer').style.paddingBottom = "230px"
                 break;
             case 90:
                 ship.setDegreeRotated(0)
+                document.getElementById('shipContainer').style.paddingBottom = "30px"
                 break;
         }
         shipElement.style.transform=`rotate(${ship.degreeRotated}deg)`
-    }    
+    } 
+
 }
 
 function isSetShipAllowed(field, ship){
