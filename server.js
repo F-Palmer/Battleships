@@ -126,7 +126,12 @@ app.get("/hitField/Computer", (req, res) => {
 
 })
 
-app.listen(8000)
+
+const port = 8000;
+app.listen(port, () => {
+    console.log(`Server started on ${port}`);
+});
+
 
 
 

@@ -14,19 +14,24 @@
                 <div id="container1" class="container"></div>
                 <div id="container2" class="container"></div>
             </div>
-            <dialog id="gameStartDialog">
+            <dialog id="gameStartDialog" class="gameDialog">
                 <div id="divGameStartDialog"></div>
-                <button onclick="closeGameStartDialog()">Schließen</button>
+                <div class="divGameDialogBtns">
+                    <button onclick="closeGameStartDialog()">Schließen</button>
+                </div>
             </dialog>
-            <dialog id="gameEndDialog">
+            <dialog id="gameEndDialog" class="gameDialog">
                 <div id="divGameEndDialog"></div>
-                <button id="repeatGameEndDialog" onclick="repeatGameEndDialog()">Nochmal spielen</button>
-                <button onclick="closeGameEndDialog()">Zurück zur Starseite</button>
+                <div class="divGameDialogBtns">
+                    <button id="repeatGameEndDialog" class="gamebtn" onclick="repeatGameEndDialog()">Nochmal spielen</button>
+                    <button class="gamebtn" onclick="closeGameEndDialog()">Zurück zur Starseite</button>
+                </div>
             </dialog>
         
             <div id="gamebtns">
-                <button class="gamebtn" onclick="flip()">Schiffe rotieren</button>
+                <button class="gamebtn" id="rotateShipsButton"onclick="flip()">Schiffe rotieren</button>
                 <button class="gamebtn" id="startGameButton" onclick="startGame()">Gefecht starten</button>
+                <button class="gamebtn" onclick="closeGameEndDialog()">Zurück zur Starseite</button>
             </div>
 
             <div id="shipContainer"></div>

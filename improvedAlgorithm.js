@@ -15,7 +15,6 @@ function getNextField(difficulty){
 
             do{
                 field = Math.floor(Math.random() * (amountOfRows * amountOfRows));
-                console.log("1")
             }while(gameBoardPlayer[field].hit)
 
             gameBoardPlayer[field].hit = true;
@@ -39,7 +38,6 @@ function getNextField(difficulty){
 
             do{
                 field = Math.floor(Math.random() * (amountOfRows * amountOfRows));
-                console.log("2")
             }while(!gameBoardPlayer[field].ship || gameBoardPlayer[field].hit)
 
             gameBoardPlayer[field].hit = true;
@@ -62,7 +60,6 @@ function getNextField(difficulty){
             let tmpRow = nextFieldPossition.row;
             let tmpColum = nextFieldPossition.colum;
             field = rowColumToNumber(tmpRow, tmpColum); 
-            console.log("3")
 
         }while(gameBoardPlayer[field].hit)
 
@@ -144,11 +141,8 @@ function getAllAdjacentFields(field){
 function temp(){
     
     let nextField = getNextField(0.1); 
-    console.log(shotStatus + " " + nextField);
     hitFieldComputer(container1 , nextField, gameBoardPlayer);
     turn = Player;
-
-    console.log("_______________");
 }
 
 function hitFieldComputer(container, IdOfField, gameBoard){
@@ -177,3 +171,20 @@ function hitFieldComputer(container, IdOfField, gameBoard){
         checkForWin(ships)
     
 }
+
+function numberToRow(number){
+    let row = Math.floor(number/amountOfRows);
+    return row;
+}
+
+function numberToColum(number){
+    let colum = number % amountOfRows; 
+    return colum;
+}
+
+function rowColumToNumber(row, colum){
+    let number = row*10 + colum;
+    return number;
+}
+
+

@@ -1,22 +1,18 @@
 #gameContainer{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    height: 100vh;
 }
 
 #gameFieldContainer{
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
     align-items: center;
-
+    flex-wrap: wrap-reverse;
 }
     
 .container{
     min-width: 500px;
     min-height: 500px;
-    
     margin: 10px;
     display: flex;
     flex-wrap: wrap;
@@ -26,8 +22,7 @@
 }
 
 .field{
-    background-color: #007BFF ;
-    
+    background-color: #007BFF ; 
     border-color: aqua;
     border: solid 1px aqua;
     width: 48px;
@@ -38,11 +33,12 @@
     margin: 10px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items:center;
     background-color: white;
     padding: 30px 150px;
     border-radius: 50px;
+    row-gap: 30px;
 }
 
 .destroyer{
@@ -87,22 +83,30 @@
     -ms-user-select: none;
   }
 
-  .hidden{
+.hidden{
     visibility: hidden;
-  }
+}
 
-  #gameStartDialog{
-    z-index: 10;
-  }
+.gameDialog{
+    text-align: center;
+    border-radius: 10px;
+    border-color: #007BFF;
+}
 
-  #gamebtns{
+#gamebtns{
     display: flex;
     justify-content: center;
     margin: 10px;
-  }
-  .gamebtn{
+}
+.gamebtn{
     margin-left: 10px;
     margin-right: 10px;
-  }
+}
+
+.divGameDialogBtns{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
 
 
