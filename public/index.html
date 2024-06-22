@@ -2,12 +2,14 @@
 <html lang="de">
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="index.css">
+        <link rel="stylesheet" type="text/css" href="./css-files/general.css">
+        <link rel="stylesheet" type="text/css" href="./css-files/menu.css">
+        <link rel="stylesheet" type="text/css" href="./css-files/index.css">
         <title>Battleships</title>
         <script src="./index.js"></script>
     </head>
     <body class="menuebody">
-        <div id="panel">
+        <div class="panel">
 
             <h1>Battleships</h1>
 
@@ -27,7 +29,7 @@
             <button id="start-game" onclick="startGame()">Spiel starten</button>
 
             <div class="tooltip">
-                <button class="btn" onclick="openAnleitung()"><img id="anleitungsIcon" src="./Images/anleitung.svg" alt="Zeigt ein Symbol das für eine Anleitung stehen soll">
+                <button id="anleitungsbutton" onclick="openAnleitung()"><img id="anleitungsIcon" src="./Images/anleitung.svg" alt="Zeigt ein Symbol das für eine Anleitung stehen soll">
                     <span class="tooltiptext">Spielanleitung</span>
                 </button>  
             </div>
