@@ -88,16 +88,22 @@ function setShipElements(){
     }
 }
 function containerEventListener(){
-    container2.addEventListener('click', event => {
-        if( winner == ""){
-            console.log("click")
-            mouseX2 = event.clientX - container2.getBoundingClientRect().x 
-            mouseY2 = event.clientY - container2.getBoundingClientRect().y 
-            let IdOfField = getMousePositionX() + getMousePositionY() * amountOfRows
-            
-            hitField( IdOfField)      
+
+    let fieldElementArray = Array.from(container2.children)
+        
+        for(let i = 0; i < amountOfRows * amountOfRows; i ++){
+            fieldElementArray[i].addEventListener('click', event => {
+                if( winner == ""){
+                    // console.log("click")
+                    // mouseX2 = event.clientX - container2.getBoundingClientRect().x 
+                    // mouseY2 = event.clientY - container2.getBoundingClientRect().y 
+                    let IdOfField = parseInt(fieldElementArray[i].id)
+                    console.log(IdOfField)
+                    
+                    hitField( IdOfField)      
+                }
+            })
         }
-    })
 }
 
 
