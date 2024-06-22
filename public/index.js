@@ -29,3 +29,11 @@ function startGame(){
 
     }
 }
+
+function backToIndex(){
+    document.location.href = "/index.html"
+}
+
+function openAnleitung(){
+    document.location.href = "/anleitung.html"    
+}
