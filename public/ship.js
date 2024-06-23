@@ -1,7 +1,3 @@
- 
- 
- 
- 
 class ship{
     degreeRotated = 0;
     position;

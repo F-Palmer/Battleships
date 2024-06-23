@@ -1,15 +1,14 @@
 function startGame(){
-    console.log("start game")
-    let difficultyLevel = document.getElementById("selectDifficulty").value 
-    if(difficultyLevel != ""){
+    let difficultyLevelText = document.getElementById("selectDifficulty").value 
+    if(difficultyLevelText != ""){
+        let difficultyLevel
 
-        switch(difficultyLevel){
-            case "easy":
-                difficultyLevel = 0;
-            case "medium":
-                difficultyLevel = 0.1
-            case "hard":
-                difficultyLevel = 0.2
+        if(difficultyLevelText == "easy"){
+            difficultyLevel = 0;
+        }else if(difficultyLevelText == "medium"){
+            difficultyLevel = 0.1;
+        }else if(difficultyLevelText == "hard"){
+            difficultyLevel = 0.2;
         }
 
         fetch(`/setDifficultyLevel` , { headers: {  'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -21,11 +20,7 @@ function startGame(){
         method: "GET"
         })
 
-
-
-        console.log("battleship.html")
         document.location.href = "/battleships.html"
-        console.log("battleship.html")
 
     }else{
         document.getElementById("noDifficultySelectedDialogDiv").innerHTML='<p> Du musst einen Schwierigkeitsgrad wählen, bevor du das Spiel starten kannst!</p>'
