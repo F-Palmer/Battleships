@@ -45,7 +45,7 @@ addEventListener()
 function startGame(){
     if(Array.from(shipContainer.children).length === 0){
         containerEventListener()
-        document.getElementById("divGameStartDialog").innerHTML ="<p> Gefecht gestartet!<p/>"
+        document.getElementById("divGameStartDialog").innerHTML ="<p> Gefecht gestartet! Klicke auf ein gegnerisches Feld um einen Schuss abzugeben.<p/>"
         startGameButton.classList.add("hidden")
         document.getElementById("gamebtns").removeChild(document.getElementById("startGameButton"))
         document.getElementById("gamebtns").removeChild(document.getElementById("rotateShipsButton"))
@@ -84,13 +84,13 @@ function setContainerStyle(container, squareWidth, amountOfRows){
 }
 
 function setShipElements(){
-    for(ship of ships){
+    for(let ship of ships){
         const shipElement = document.createElement("img")
         shipElement.id = ship.id
         shipElement.classList.add(ship.name)
         shipElement.classList.add("ship")
         shipElement.setAttribute("alt", ship.name)
-        shipElement.src = "/Images/schlachtschiff.png"
+        shipElement.src = `./Images/Schlachtschiffbilder/Ship${ship.length -1}_player.png`
         shipContainer.append(shipElement)
     }
 }
@@ -334,7 +334,7 @@ function paintShipImage(ship){
     shipElement.classList.add(ship.name)
     shipElement.classList.add("ship")
     shipElement.setAttribute("alt", ship.name)
-    shipElement.src = "/Images/schlachtschiffDestroyed.png"
+    shipElement.src = `./Images/Schlachtschiffbilder/Ship${ship.length -1}_computer.png`  
     shipElement.style.transform=`rotate(${ship.degreeRotated}deg)`
     fieldElement.append(shipElement)
 }
