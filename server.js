@@ -29,7 +29,6 @@ app.get("/", (req, res) => {
 app.post("/setDifficultyLevel", (req, res) => {
     
     difficultyLevel = req.body.difficultyLevel
-    console.log(difficultyLevel)
     res.sendStatus(200)
 })
 
@@ -73,7 +72,6 @@ app.get("/hitField/Player/:id", (req, res) => {
 })
 
 app.get("/hitField/Computer", (req, res) => {
-    console.log(difficultyLevel)
     let IdOfField = getNextField(difficultyLevel)   
     hitField(IdOfField, gameBoardPlayer, res)
     
