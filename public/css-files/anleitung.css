@@ -1,21 +1,32 @@
-.menuebody {
+#anleitungsbody {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    padding: 30px;
+    text-align: center;
 }
 
-h1 {
-    color: #333;
-}
-.panel {
+
+#anleitungspanel {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: white;
     border-color: #333;
-    padding: 50px 150px;
+    padding: 50px 100px;
     border-radius: 50px;
+}
+
+.anleitungsAbschnitt{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.videoElement{
+    width: 400px;
+    margin: 10px;
 }
