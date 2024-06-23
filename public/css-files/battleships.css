@@ -34,11 +34,11 @@
 #shipContainer{
     margin: 10px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    flex-wrap:wrap; /* Schiffe werden untereinander angeordnet, wenn das Fenster kleiner wird*/
+    justify-content: space-evenly; /* Schiffe werden mit gleichmäßig platziert*/
     align-items:center;
     background-color: white;
-    padding: 30px 150px;
+    padding: 30px 65px;
     padding-top: 30px;
     padding-bottom: 30px;
     border-radius: 50px;
@@ -76,7 +76,6 @@
 .ship{
     transform: rotate(0deg);
     transform-origin: 24px 24px;
-
 }
 
 .unselectable {
