@@ -29,8 +29,8 @@ let FieldsOccupied = []
 //Größe der Spielfeldcontainer wird festgelegt
 const squareWidth = 50;
 const amountOfRows = 10
-setContainerStyle(fieldContainer1, squareWidth, amountOfRows)
-setContainerStyle(fieldContainer2, squareWidth, amountOfRows)
+//setContainerStyle(fieldContainer1, squareWidth, amountOfRows)
+//setContainerStyle(fieldContainer2, squareWidth, amountOfRows)
 
 //Die Spielfeldcontainer werden mit den einzelnen Feldern gefüllt
 fillContainer(fieldContainer1)
